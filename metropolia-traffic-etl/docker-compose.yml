@@ -1,0 +1,85 @@
+services:
+
+  # ================================
+  # 1. POSTGRESQL DATA WAREHOUSE
+  # ================================
+  target-postgres:
+    image: postgres:15-alpine
+    container_name: metropolia-postgres
+
+    environment:
+      POSTGRES_USER: metropolia_user
+      POSTGRES_PASSWORD: metropolia_pass
+      POSTGRES_DB: metropolia_warehouse
+
+    ports:
+      - "5434:5432"
+
+    volumes:
+      - postgres_metropolia:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+
+
+  # ================================
+  # 2. AIRFLOW + PYSPARK
+  # ================================
+  airflow:
+    image: iqdamshidqi/airflow-pyspark:2.8.1
+    container_name: metropolia-airflow
+
+    environment:
+      AIRFLOW__WEBSERVER__WORKERS: "1"
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__CORE__DEFAULT_TIMEZONE: Asia/Jakarta
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: >-
+        postgresql+psycopg2://airflow:airflow@airflow-db:5432/airflow
+
+      AIRFLOW__CORE__FERNET_KEY: ""
+
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./data:/opt/airflow/data
+      - ./sql:/opt/airflow/sql
+
+    ports:
+      - "8081:8080"
+
+    depends_on:
+      - airflow-db
+
+    command: >
+      bash -c "
+      airflow db migrate &&
+      airflow users create
+      --username admin
+      --password admin
+      --firstname Admin
+      --lastname User
+      --role Admin
+      --email admin@example.com || true;
+      airflow scheduler & airflow webserver
+      "
+
+
+  # ================================
+  # 3. AIRFLOW METADATA DATABASE
+  # ================================
+  airflow-db:
+    image: postgres:15-alpine
+    container_name: metropolia-airflow-db
+
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+
+    volumes:
+      - airflow_metadata:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_metropolia:
+  airflow_metadata:

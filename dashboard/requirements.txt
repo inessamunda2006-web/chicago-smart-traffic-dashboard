@@ -1,0 +1,8 @@
+streamlit>=1.50
+pandas
+plotly>=5.24
+sqlalchemy
+psycopg2-binary
+pyarrow
+shapely>=2.0
+scipy
