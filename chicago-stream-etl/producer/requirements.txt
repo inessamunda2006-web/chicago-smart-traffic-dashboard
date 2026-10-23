@@ -1,0 +1,3 @@
+requests
+kafka-python==3.0.11
+psycopg2-binary
