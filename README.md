@@ -1,6 +1,6 @@
 # Smart Traffic Management Kota Chicago
 
-**Final Project Analisis Big Data — S1 Sains Data, Institut Teknologi Sepuluh Nopember (ITS), 2026**
+**Project Analisis Big Data - Kelompok 5 - S1 Sains Data, Institut Teknologi Sepuluh Nopember (ITS), 2026**
 
 Proyek ini mengimplementasikan integrasi data perkotaan Chicago untuk mendukung analisis lalu lintas, kecelakaan, kriminalitas, dan kualitas udara. Proyek memiliki dua jalur pemrosesan data, yaitu **Batch ETL** dan **Streaming ETL**, serta dashboard analitik berbasis Streamlit.
 
