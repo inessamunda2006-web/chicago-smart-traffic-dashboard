@@ -4,7 +4,7 @@
 
 Proyek ini mengimplementasikan integrasi data perkotaan Chicago untuk mendukung analisis lalu lintas, kecelakaan, kriminalitas, dan kualitas udara. Proyek memiliki dua jalur pemrosesan data, yaitu **Batch ETL** dan **Streaming ETL**, serta dashboard analitik berbasis Streamlit.
 
-> **Catatan penting tentang dashboard:** Dashboard menggunakan **data hasil Batch ETL**. Dashboard tidak menggunakan aliran pesan Kafka sebagai sumber datanya. Streaming ETL merupakan jalur pemrosesan terpisah yang dibangun dan dievaluasi sebagai bagian dari proyek.
+> Dashboard menggunakan **data hasil Batch ETL**. Dashboard tidak menggunakan aliran pesan Kafka sebagai sumber datanya. Streaming ETL merupakan jalur pemrosesan terpisah yang dibangun dan dievaluasi sebagai bagian dari proyek.
 
 ## Daftar Isi
 
@@ -392,10 +392,17 @@ Pastikan container aktif dan port yang ditetapkan pada `docker-compose.yml` tida
 - Periksa jumlah record yang masuk, diperbarui, atau gagal melalui log dan query PostgreSQL.
 
 ---
+## Perancang:
+- Naomy Athaya Jovany - 5052241002
+- Amelia Widiastuti - 5052241007
+- Marvelio Jonathan W. - 5052241017
+- M. Razan Thariq A. - 5052241025
+- Aqila Ikhza K. - 5052241032
+- Inessa Regina Angelica Munda - 5052241037
+
+
 
 ## Referensi Sumber Data dan Dokumentasi
 
 - City of Chicago — [Chicago Data Portal](https://data.cityofchicago.org/)
 - Socrata — [Socrata Open Data API (SODA) Documentation](https://dev.socrata.com/docs/)
-
-Untuk rincian metode, hasil pemeriksaan pipeline, pembahasan dashboard, dan keterbatasan, rujuk laporan **“Implementasi Big Data Analytics melalui Integrasi Batch ETL dan Streaming ETL pada Sistem Smart Traffic Management Kota Chicago”**.
